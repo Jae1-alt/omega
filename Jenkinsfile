@@ -22,7 +22,6 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Jae1-alt/omega.git' 
             }
         }
-        agent any
         tools {
             jfrog 'jfrog-cli-1'
             }
