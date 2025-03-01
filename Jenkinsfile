@@ -22,22 +22,6 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Jae1-alt/omega.git' 
             }
         }
-        tools {
-            jfrog 'jfrog-cli-1'
-            }
-            stages{
-                stage ('Testing') {
-                    steps {
-                        jf '-v'
-                        jf 'c show'
-                        jf 'rt ping'
-                        sh 'touch test-file'
-                        jf 'rt u test-file jfrog-cli-1/'
-                        jf 'rt bp'
-                        jf 'rt dl jfrog-cli-1/test-file'
-                    }
-                }
-            }
         stage('Initialize Terraform') {
             steps {
                 sh '''
@@ -72,6 +56,23 @@ pipeline {
                     terraform apply -auto-approve tfplan
                     '''
                 }
+            }
+        }
+    }
+    agent any
+    tools { 
+        jfrog 'jfrog-cli-1'
+    }
+    stages{
+        stage ('Testing') {
+            steps {
+                    jf '-v'
+                    jf 'c show'
+                    jf 'rt ping'
+                    sh 'touch test-file'
+                    jf 'rt u test-file jfrog-cli-1/'
+                    jf 'rt bp'
+                    jf 'rt dl jfrog-cli-1/test-file'
             }
         }
     }
