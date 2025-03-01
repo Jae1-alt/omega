@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/Jae1-alt/beta.git' 
+                git branch: 'main', url: 'https://github.com/Jae1-alt/omega.git' 
             }
         }
         stage('Initialize Terraform') {
